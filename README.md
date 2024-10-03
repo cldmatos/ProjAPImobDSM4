@@ -38,6 +38,6 @@ Esta é uma forma de rodar seu app — você também pode executá-lo diretament
 
 ## Como Usar
 
-Para usar o aplicativo, faça o login e digite o nome do personagem no campo de busca. A API retornará todos os dados daquele personagem.
+Para usar o aplicativo, faça o login e digite o nome do personagem no campo de busca. A API retornará todos os dados daquele personagem, com informações detalahadas e uma imagem.
 
 

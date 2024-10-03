@@ -41,19 +41,21 @@ export default class User extends Component {
 
   render() {
     const { route } = this.props;
-    const { user } = route.params || {}; // Protegendo o acesso
+    const { user } = route.params;
     const { episodes, error } = this.state;
-
-    if (!user) {
-      return <Text>Usuário não encontrado.</Text>; // Mensagem de erro
-    }
 
     return (
       <Container>
         <Header>
-          <Avatarperfil source={{ uri: user.avatar || 'default_avatar_url' }} />
-          <Nameperfil>{user.name || 'Nome não disponível'} ({user.gender || 'Gênero não disponível'})</Nameperfil>
+          {/* Avatar do personagem */}
+          <Avatarperfil source={{ uri: user.avatar }} />
 
+          {/* Primeira linha: Nome e Gênero */}
+          <Nameperfil style={{ fontSize: 14, fontWeight: 'bold' }}>
+            {user.name} ({user.gender})
+          </Nameperfil>
+
+          {/* Segunda linha: Status, Species e Type com indicador de status */}
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View
               style={{
@@ -64,19 +66,30 @@ export default class User extends Component {
                 marginRight: 5,
               }}
             />
-            <Bioperfil>{`${user.status || 'Status desconhecido'} - ${user.species || 'Espécie desconhecida'} - ${user.type || 'N/A'}`}</Bioperfil>
+            <Bioperfil style={{ fontSize: 12 }}>
+              {`${user.status} - ${user.species} - ${user.type || 'N/A'}`}
+            </Bioperfil>
           </View>
 
-          <Bioperfil>
-            {`${user.origin?.name || 'Origem desconhecida'} - ${user.location?.name || 'Localização desconhecida'}`}
+          {/* Terceira linha: Origem e Localização */}
+          <Bioperfil style={{ fontSize: 12 }}>
+            {`${user.origin.name} - ${user.location.name}`}
           </Bioperfil>
 
-          <Bioperfil onPress={() => Linking.openURL(user.url)}>
-            {user.url || 'URL não disponível'}
+          {/* Quarta linha: URL do personagem como link */}
+          <Bioperfil
+            style={{ fontSize: 12, color: 'blue' }}
+            onPress={() => Linking.openURL(user.url)}
+          >
+            {user.url}
           </Bioperfil>
 
-          <Bioperfil>{`Data de criação: ${user.created || 'Data não disponível'}`}</Bioperfil>
+          {/* Quinta linha: Data de criação exatamente como está */}
+          <Bioperfil style={{ fontSize: 12 }}>
+            {`Data de criação: ${user.created}`}
+          </Bioperfil>
 
+          {/* Renderizando episódios */}
           {error ? (
             <Text style={{ fontSize: 12, color: 'red' }}>{error}</Text>
           ) : (
@@ -96,6 +109,4 @@ export default class User extends Component {
       </Container>
     );
   }
-
-
 }

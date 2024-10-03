@@ -76,14 +76,13 @@ export default class Main extends Component {
         species: character.species,
         type: character.type,
         gender: character.gender,
-        origin: character.origin, // Passar o objeto completo
-        location: character.location, // Passar o objeto completo
+        origin: character.origin.name,
+        location: character.location.name,
         avatar: character.image,
         episodeName: episodeResponse.data.name,
         url: character.url,
         created: character.created,
       };
-      
 
       this.setState({
         users: [...users, data],
@@ -164,7 +163,7 @@ export default class Main extends Component {
                 }}
                 style={{backgroundColor: '#FF6347'}}
               >
-                <ProfileButtonText>Excluir</ProfileButtonText>
+                <ProfileButtonText>Apagar</ProfileButtonText>
               </ProfileButton>
             </User>
           )}
