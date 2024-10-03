@@ -108,7 +108,7 @@ export default class Main extends Component {
           <Input
             autoCorrect={false}
             autoCapitalize="none"
-            placeholder="Adicionar personagem"
+            placeholder="Buscar personagem"
             value={newUser}
             onChangeText={text => this.setState({newUser: text})}
             returnKeyType="send"
@@ -118,7 +118,7 @@ export default class Main extends Component {
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Icon name="add" size={22} color="#fff" />
+              <Icon name="search" size={22} color="#fff" />
             )}
           </SubmitButton>
         </Form>
@@ -161,9 +161,9 @@ export default class Main extends Component {
                     ),
                   });
                 }}
-                style={{backgroundColor: '#FFC0CB'}}
+                style={{backgroundColor: '#FF6347'}}
               >
-                <ProfileButtonText>Excluir</ProfileButtonText>
+                <ProfileButtonText>Apagar</ProfileButtonText>
               </ProfileButton>
             </User>
           )}
