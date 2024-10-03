@@ -47,7 +47,7 @@ const Cadastro = () => {
                 value={course}
                 onChangeText={setCourse}
             />
-            <TouchableOpacity style={styles.button} onPress={handleSave}>
+            <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={handleSave}>
                 <Text style={styles.buttonText}>Salvar</Text>
             </TouchableOpacity>
         </View>

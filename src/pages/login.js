@@ -35,7 +35,7 @@ const Login = () => {
                 value={password}    
                 onChangeText={setPassword}
             />
-            <TouchableOpacity style={[styles.button, { marginTop: 20 }]} onPress={handleLogin} >
+            <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={handleLogin} >
                 <Text style={ styles.buttonText }>Entrar</Text>
             </TouchableOpacity>
 

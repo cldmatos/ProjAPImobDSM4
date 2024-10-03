@@ -26,6 +26,7 @@ export default function Routes() {
                 fontWeight: 'bold',
                 color: '#fff',
               },
+              headerTintColor: '#fff',
             }}
           />
         <Stack.Screen
@@ -41,6 +42,7 @@ export default function Routes() {
               fontWeight: 'bold',
               color: '#fff',
             },
+            headerTintColor: '#fff',
           }}
         />
         <Stack.Screen
@@ -56,6 +58,7 @@ export default function Routes() {
               fontWeight: 'bold',
               color: '#fff',
             },
+            headerTintColor: '#fff',
           }}
         />
         <Stack.Screen
@@ -71,6 +74,7 @@ export default function Routes() {
               fontWeight: 'bold',
               color: '#fff',
             },
+            headerTintColor: '#fff',
           }}
         />
       </Stack.Navigator>
