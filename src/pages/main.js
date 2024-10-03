@@ -76,13 +76,14 @@ export default class Main extends Component {
         species: character.species,
         type: character.type,
         gender: character.gender,
-        origin: character.origin.name,
-        location: character.location.name,
+        origin: character.origin, // Passar o objeto completo
+        location: character.location, // Passar o objeto completo
         avatar: character.image,
         episodeName: episodeResponse.data.name,
         url: character.url,
         created: character.created,
       };
+      
 
       this.setState({
         users: [...users, data],
@@ -108,7 +109,7 @@ export default class Main extends Component {
           <Input
             autoCorrect={false}
             autoCapitalize="none"
-            placeholder="Adicionar personagem"
+            placeholder="Buscar personagem"
             value={newUser}
             onChangeText={text => this.setState({newUser: text})}
             returnKeyType="send"
@@ -118,7 +119,7 @@ export default class Main extends Component {
             {loading ? (
               <ActivityIndicator color="#fff" />
             ) : (
-              <Icon name="add" size={22} color="#fff" />
+              <Icon name="search" size={22} color="#fff" />
             )}
           </SubmitButton>
         </Form>
@@ -161,7 +162,7 @@ export default class Main extends Component {
                     ),
                   });
                 }}
-                style={{backgroundColor: '#FFC0CB'}}
+                style={{backgroundColor: '#FF6347'}}
               >
                 <ProfileButtonText>Excluir</ProfileButtonText>
               </ProfileButton>
