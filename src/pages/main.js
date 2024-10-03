@@ -74,10 +74,14 @@ export default class Main extends Component {
         name: character.name,
         status: character.status,
         species: character.species,
-        avatar: character.image,
-        location: character.location.name,
+        type: character.type,
+        gender: character.gender,
         origin: character.origin.name,
-        episodeName: episodeResponse.data.name, // Nome do episódio
+        location: character.location.name,
+        avatar: character.image,
+        episodeName: episodeResponse.data.name,
+        url: character.url,
+        created: character.created,
       };
 
       this.setState({
