@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Linking, View, Text } from 'react-native';
+import { Linking, View, Text, Image } from 'react-native';
 import api from '../services/api';
 
 import {
   Container,
   Header,
-  Avatarperfil,
   Nameperfil,
   Bioperfil,
   Starred,
@@ -14,10 +13,61 @@ import {
   Title,
 } from './styles';
 
+const styles = {
+  card: {
+    flexDirection: 'row', // Alterado para 'row' para colocar a imagem à esquerda
+    backgroundColor: '#333', // Cor cinza escuro
+    borderRadius: 10, // Bordas arredondadas do card
+    padding: 10,
+    margin: 10,
+    alignItems: 'center', // Mantém a imagem e o texto alinhados verticalmente
+  },
+  avatar: {
+    width: '50%', // Imagem ocupa metade da largura do card
+    height: '100%', // Altura do card
+    borderRadius: 10, // Para bordas arredondadas
+    marginRight: 10, // Remove a margem
+  },
+  infoContainer: {
+    flex: 1, // Para ocupar o espaço restante
+    alignItems: 'flex-start', // Alinha o texto à esquerda
+  },
+  name: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'white', // Cor do texto
+    textAlign: 'left', // Alinhamento à esquerda
+  },
+  details: {
+    fontSize: 11,
+    color: 'lightgray', // Cor dos detalhes
+    textAlign: 'left', // Alinhamento à esquerda
+  },
+  statusContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start', // Alinha o status à esquerda
+  },
+  statusIndicator: {
+    width: 8, // Diminuindo o tamanho da bola
+    height: 8,
+    borderRadius: 4, // Mantendo a forma circular
+    marginRight: 5,
+  },
+  locationContainer: {
+    marginTop: 5, // Espaçamento superior
+    alignItems: 'flex-start', // Alinha os textos à esquerda
+  },
+  label: {
+    fontWeight: 'bold', // Para destacar os rótulos
+    color: 'white',
+  },
+};
+
 export default class User extends Component {
   state = {
-    episodes: [], // Lista de episódios
-    error: null,  // Para capturar possíveis erros
+    episodes: [],
+    error: null,
   };
 
   async componentDidMount() {
@@ -25,12 +75,11 @@ export default class User extends Component {
     const { user } = route.params;
 
     try {
-      // Consultando os episódios associados ao personagem
-      const episodeUrls = user.episode || []; // Usar um array vazio se episode não estiver definido
+      const episodeUrls = user.episode || [];
       if (episodeUrls.length > 0) {
         const episodesPromises = episodeUrls.map(url => api.get(url));
         const episodesResponses = await Promise.all(episodesPromises);
-        const episodes = episodesResponses.map(response => response.data.name); // Nome de cada episódio
+        const episodes = episodesResponses.map(response => response.data.name);
         this.setState({ episodes });
       }
     } catch (error) {
@@ -47,51 +96,58 @@ export default class User extends Component {
     return (
       <Container>
         <Header>
-          {/* Avatar do personagem */}
-          <Avatarperfil source={{ uri: user.avatar }} />
+          <View style={styles.card}>
+            <Image style={styles.avatar} source={{ uri: user.avatar }} />
 
-          {/* Primeira linha: Nome e Gênero */}
-          <Nameperfil style={{ fontSize: 14, fontWeight: 'bold' }}>
-            {user.name} ({user.gender})
-          </Nameperfil>
+            <View style={styles.infoContainer}>
+              <Nameperfil style={styles.name}>
+                {user.name} ({user.gender})
+              </Nameperfil>
 
-          {/* Segunda linha: Status, Species e Type com indicador de status */}
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <View
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: 5,
-                backgroundColor: user.status === 'Alive' ? 'green' : 'red',
-                marginRight: 5,
-              }}
-            />
-            <Bioperfil style={{ fontSize: 12 }}>
-              {`${user.status} - ${user.species} - ${user.type || 'N/A'}`}
-            </Bioperfil>
+              <View style={styles.statusContainer}>
+                <View
+                  style={[styles.statusIndicator, { backgroundColor: user.status === 'Alive' ? 'green' : 'red' }]}
+                />
+                <Bioperfil style={styles.details}>
+                  {`${user.status} - ${user.species}`}
+                </Bioperfil>
+              </View>
+
+              {/* Last known location */}
+              <View style={styles.locationContainer}>                
+                <Bioperfil style={styles.details}>
+                  {`Last known location: ${user.location}`}
+                </Bioperfil>
+              </View>
+
+              {/* First seen */}
+              <View style={styles.locationContainer}>                
+                <Bioperfil style={styles.details}>
+                  {`First seen: ${user.episodeName}`}
+                </Bioperfil>
+              </View>
+
+              {/* URL */}
+              <View style={styles.locationContainer}>                
+                <Bioperfil
+                  style={[styles.details, { color: 'blue' }]}
+                  onPress={() => Linking.openURL(user.url)}
+                >
+                  {user.url}
+                </Bioperfil>
+              </View>
+
+              {/* Created */}
+              <View style={styles.locationContainer}>                
+                <Bioperfil style={styles.details}>
+                  {`Created: ${user.created}`}
+                </Bioperfil>
+              </View>
+            </View>
           </View>
 
-          {/* Terceira linha: Origem e Localização */}
-          <Bioperfil style={{ fontSize: 12 }}>
-            {`${user.origin.name} - ${user.location.name}`}
-          </Bioperfil>
-
-          {/* Quarta linha: URL do personagem como link */}
-          <Bioperfil
-            style={{ fontSize: 12, color: 'blue' }}
-            onPress={() => Linking.openURL(user.url)}
-          >
-            {user.url}
-          </Bioperfil>
-
-          {/* Quinta linha: Data de criação exatamente como está */}
-          <Bioperfil style={{ fontSize: 12 }}>
-            {`Data de criação: ${user.created}`}
-          </Bioperfil>
-
-          {/* Renderizando episódios */}
           {error ? (
-            <Text style={{ fontSize: 12, color: 'red' }}>{error}</Text>
+            <Text style={{ fontSize: 12, color: 'red', textAlign: 'center' }}>{error}</Text>
           ) : (
             <Stars
               data={episodes}
@@ -99,7 +155,7 @@ export default class User extends Component {
               renderItem={({ item }) => (
                 <Starred>
                   <Info>
-                    <Title>{item}</Title>
+                    <Title style={{ textAlign: 'center' }}>{item}</Title>
                   </Info>
                 </Starred>
               )}
