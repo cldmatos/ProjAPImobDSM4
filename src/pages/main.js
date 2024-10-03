@@ -151,7 +151,7 @@ export default class Main extends Component {
                   this.props.navigation.navigate('user', {user: item});
                 }}
               >
-                <ProfileButtonText>Ver Perfil</ProfileButtonText>
+                <ProfileButtonText>Ver mais detalhes</ProfileButtonText>
               </ProfileButton>
               <ProfileButton
                 onPress={() => {
