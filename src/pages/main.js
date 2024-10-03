@@ -71,6 +71,7 @@ export default class Main extends Component {
         species: character.species,
         avatar: character.image,
         location: character.location.name,
+        episodes: character.episodes.name,
       };
 
       this.setState({
@@ -120,6 +121,8 @@ export default class Main extends Component {
               <Avatar source={{uri: item.avatar}} />
               <Name>{item.name}</Name>
               <Bio>{`${item.status} - ${item.species}`}</Bio>
+              <Bio>{`Last known location: ${item.location}`}</Bio>
+              <Bio>{`First seen in: ${item.episodes.name}`}</Bio>
 
               <ProfileButton
                 onPress={() => {
