@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Keyboard, ActivityIndicator} from 'react-native';
+import {Keyboard, ActivityIndicator, View} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -57,6 +57,7 @@ export default class Main extends Component {
 
       const character = response.data.results[0]; // Pegando o primeiro resultado
 
+      // Verifica se o personagem já foi adicionado
       if (users.find(user => user.name === character.name)) {
         alert('Personagem já adicionado!');
         this.setState({
@@ -65,13 +66,18 @@ export default class Main extends Component {
         return;
       }
 
+      // Fazendo a requisição para buscar o nome do primeiro episódio
+      const episodeUrl = character.episode[0]; // Primeiro episódio da lista
+      const episodeResponse = await api.get(episodeUrl); // Requisição à URL do episódio
+
       const data = {
         name: character.name,
         status: character.status,
         species: character.species,
         avatar: character.image,
         location: character.location.name,
-        episodes: character.episodes.name,
+        origin: character.origin.name,
+        episodeName: episodeResponse.data.name, // Nome do episódio
       };
 
       this.setState({
@@ -120,9 +126,21 @@ export default class Main extends Component {
             <User>
               <Avatar source={{uri: item.avatar}} />
               <Name>{item.name}</Name>
-              <Bio>{`${item.status} - ${item.species}`}</Bio>
+              {/* Indicador de status (verde para "alive", vermelho para outros) */}
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 5,
+                    backgroundColor: item.status === 'Alive' ? 'green' : 'red',
+                    marginRight: 5,
+                  }}
+                />
+                <Bio>{`${item.status} - ${item.species}`}</Bio>
+              </View>
               <Bio>{`Last known location: ${item.location}`}</Bio>
-              <Bio>{`First seen in: ${item.episodes.name}`}</Bio>
+              <Bio>{`First seen in: ${item.episodeName}`}</Bio>
 
               <ProfileButton
                 onPress={() => {
