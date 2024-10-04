@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Keyboard, ActivityIndicator, View, Text, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Footer from '/ProjAPImobDSM4/src/pages/footer';
 
 import {
   Container,
@@ -88,29 +89,26 @@ export default class Main extends Component {
       const {users, newUser} = this.state;
       this.setState({loading: true});
 
-      // Fazendo a requisição para buscar personagem pelo nome
       const response = await api.get(`/character/?name=${newUser}`);
 
       if (response.data.results.length === 0) {
-        alert('Personagem não encontrado!');
+        alert('Character not found!');
         this.setState({loading: false});
         return;
       }
 
-      const character = response.data.results[0]; // Pegando o primeiro resultado
+      const character = response.data.results[0]; 
 
-      // Verifica se o personagem já foi adicionado
       if (users.find(user => user.name === character.name)) {
-        alert('Personagem já adicionado!');
+        alert('Character already added!');
         this.setState({
           loading: false,
         });
         return;
       }
 
-      // Fazendo a requisição para buscar o nome do primeiro episódio
-      const episodeUrl = character.episode[0]; // Primeiro episódio da lista
-      const episodeResponse = await api.get(episodeUrl); // Requisição à URL do episódio
+      const episodeUrl = character.episode[0]; 
+      const episodeResponse = await api.get(episodeUrl); 
 
       const data = {
         name: character.name,
@@ -134,7 +132,7 @@ export default class Main extends Component {
 
       Keyboard.dismiss();
     } catch (error) {
-      alert('Erro ao buscar o personagem!');
+      alert('Error searching character!');
       this.setState({
         loading: false,
       });
@@ -148,7 +146,7 @@ export default class Main extends Component {
       <Container>
         <Form>
           <Input
-            placeholder="Buscar personagem"
+            placeholder="Search character"
             value={newUser}
             onChangeText={text => this.setState({newUser: text})}
             onSubmitEditing={this.handleAddUser}
@@ -201,7 +199,7 @@ export default class Main extends Component {
                     this.props.navigation.navigate('user', {user: item});
                   }}
                 >
-                  <ProfileButtonText>Ver mais detalhes</ProfileButtonText>
+                  <ProfileButtonText>See more details</ProfileButtonText>
                 </ProfileButton>
 
                 <ProfileButton
@@ -212,12 +210,13 @@ export default class Main extends Component {
                   }}
                   style={{backgroundColor: '#FF6347'}}
                 >
-                  <ProfileButtonText>Apagar</ProfileButtonText>
+                  <ProfileButtonText>Delete</ProfileButtonText>
                 </ProfileButton>
               </View>
             </View>
           )}
         />
+        <Footer />
       </Container>
     );
   }
