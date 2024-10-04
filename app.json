@@ -1,4 +1,9 @@
 {
   "name": "primeiroprojeto4dsm",
-  "displayName": "primeiroprojeto4dsm"
+  "displayName": "primeiroprojeto4dsm",
+  "extra": {
+    "eas": {
+      "projectId": "ccaec51b-7b77-4db1-8b6c-0a05587df92a"
+    }
+  }
 }

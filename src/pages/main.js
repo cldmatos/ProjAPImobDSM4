@@ -84,7 +84,61 @@ export default class Main extends Component {
   }
 
   handleAddUser = async () => {
-    // Lógica do handleAddUser (permanece a mesma)
+    try {
+      const {users, newUser} = this.state;
+      this.setState({loading: true});
+
+      // Fazendo a requisição para buscar personagem pelo nome
+      const response = await api.get(`/character/?name=${newUser}`);
+
+      if (response.data.results.length === 0) {
+        alert('Personagem não encontrado!');
+        this.setState({loading: false});
+        return;
+      }
+
+      const character = response.data.results[0]; // Pegando o primeiro resultado
+
+      // Verifica se o personagem já foi adicionado
+      if (users.find(user => user.name === character.name)) {
+        alert('Personagem já adicionado!');
+        this.setState({
+          loading: false,
+        });
+        return;
+      }
+
+      // Fazendo a requisição para buscar o nome do primeiro episódio
+      const episodeUrl = character.episode[0]; // Primeiro episódio da lista
+      const episodeResponse = await api.get(episodeUrl); // Requisição à URL do episódio
+
+      const data = {
+        name: character.name,
+        status: character.status,
+        species: character.species,
+        type: character.type,
+        gender: character.gender,
+        origin: character.origin.name,
+        location: character.location.name,
+        avatar: character.image,
+        episodeName: episodeResponse.data.name,
+        url: character.url,
+        created: character.created,
+      };
+
+      this.setState({
+        users: [...users, data],
+        newUser: '',
+        loading: false,
+      });
+
+      Keyboard.dismiss();
+    } catch (error) {
+      alert('Erro ao buscar o personagem!');
+      this.setState({
+        loading: false,
+      });
+    }
   };
 
   render() {
