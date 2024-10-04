@@ -38,11 +38,17 @@ const styles = {
     color: 'white', // Cor do texto
     textAlign: 'left', // Alinhamento à esquerda
   },
-  details: {
+field: {
     fontSize: 11,
     color: 'lightgray', // Cor dos detalhes
     textAlign: 'left', // Alinhamento à esquerda
   },
+  details: {
+    fontSize: 12,
+    color: 'white', // Cor dos detalhes
+    textAlign: 'left', // Alinhamento à esquerda
+  },
+
   statusContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -115,32 +121,41 @@ export default class User extends Component {
 
               {/* Last known location */}
               <View style={styles.locationContainer}>                
-                <Bioperfil style={styles.details}>
-                  {`Last known location: ${user.location}`}
+                <Bioperfil style={styles.field}>
+                  {`Last known location:`}
                 </Bioperfil>
+                <Text style={styles.details}>
+                  {user.location}
+                </Text>
               </View>
 
               {/* First seen */}
               <View style={styles.locationContainer}>                
-                <Bioperfil style={styles.details}>
-                  {`First seen: ${user.episodeName}`}
+                <Bioperfil style={styles.field}>
+                  {`First seen: `}
                 </Bioperfil>
+                <Text style={styles.details}>
+                 {user.episodeName}
+                </Text>
+              </View>
+
+              {/* Created */}
+              <View style={styles.locationContainer}>                
+                <Bioperfil style={styles.field}>
+                  {`Created: `}
+                  </Bioperfil>
+                  <Text style={styles.field}>
+                  {user.created}
+                  </Text>
               </View>
 
               {/* URL */}
-              <View style={styles.locationContainer}>                
+              <View style={styles.locationContainer}>
                 <Bioperfil
                   style={[styles.details, { color: 'blue' }]}
                   onPress={() => Linking.openURL(user.url)}
                 >
                   {user.url}
-                </Bioperfil>
-              </View>
-
-              {/* Created */}
-              <View style={styles.locationContainer}>                
-                <Bioperfil style={styles.details}>
-                  {`Created: ${user.created}`}
                 </Bioperfil>
               </View>
             </View>
