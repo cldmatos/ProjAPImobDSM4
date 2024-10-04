@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Keyboard, ActivityIndicator, View, Text, Image} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Footer from '/ProjAPImobDSM4/src/pages/footer';
 
 import {
   Container,
@@ -215,6 +216,7 @@ export default class Main extends Component {
             </View>
           )}
         />
+        <Footer />
       </Container>
     );
   }

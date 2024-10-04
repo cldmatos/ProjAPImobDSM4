@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Footer from '/ProjAPImobDSM4/src/pages/footer';
 
 const Login = () => {
     const [ email, setEmail ] = useState('');
@@ -42,7 +43,7 @@ const Login = () => {
             <TouchableOpacity style={[styles.button, { marginTop: 20 }]} onPress={handleRegister} >
                 <Text style={ styles.buttonText }>Register User</Text>
             </TouchableOpacity>
-
+            <Footer />
         </View>
     )
 }
