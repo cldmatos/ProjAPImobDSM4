@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import Footer from '/ProjAPImobDSM4/src/pages/footer';
 
 const Register = () => {
     const [name, setName] = useState('');
@@ -50,6 +51,8 @@ const Register = () => {
             <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={handleSave}>
                 <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
+
+            <Footer />
         </View>
     );
 };

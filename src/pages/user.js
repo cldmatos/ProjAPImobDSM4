@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Linking, View, Text, Image } from 'react-native';
 import api from '../services/api';
+import Footer from '/ProjAPImobDSM4/src/pages/footer';
 
 import {
   Container,
@@ -177,6 +178,7 @@ export default class User extends Component {
             />
           )}
         </Header>
+        <Footer />
       </Container>
     );
   }
