@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
-const Cadastro = () => {
+const Register = () => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [cpf, setCpf] = useState('');
@@ -9,46 +9,46 @@ const Cadastro = () => {
     const [course, setCourse] = useState('');
 
     const handleSave = () => {
-        alert("Dados salvos com sucesso! (Ilustrativo)");
+        alert("Data saved successfully! (Illustrative)");
     }
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={styles.input}
-                placeholder="Nome"
+                placeholder="Name"
                 value={name}
                 onChangeText={setName}
             />
             <TextInput
                 style={styles.input}
-                placeholder="Telefone"
+                placeholder="Phone"
                 value={phone}
                 onChangeText={setPhone}
                 keyboardType="phone-pad"
             />
             <TextInput
                 style={styles.input}
-                placeholder="CPF"
+                placeholder="ID"
                 value={cpf}
                 onChangeText={setCpf}
                 keyboardType="numeric"
             />
             <TextInput
                 style={styles.input}
-                placeholder="E-mail"
+                placeholder="Email"
                 value={email}
                 onChangeText={setEmail}
                 keyboardType="email-address"
             />
             <TextInput
                 style={styles.input}
-                placeholder="Curso"
+                placeholder="Course"
                 value={course}
                 onChangeText={setCourse}
             />
             <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={handleSave}>
-                <Text style={styles.buttonText}>Salvar</Text>
+                <Text style={styles.buttonText}>Save</Text>
             </TouchableOpacity>
         </View>
     );
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Cadastro;
+export default Register;

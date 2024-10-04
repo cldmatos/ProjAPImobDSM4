@@ -12,40 +12,39 @@ const Login = () => {
         if (email === '' && password === ''){
             navigation.navigate('main')
         } else {
-            alert('E-mail ou senha inválidos!')
+            alert('Invalid email or password!')
         }
     }
 
-    const handleCadastro = () => {
-        navigation.navigate('cadastro')
+    const handleRegister = () => {
+        navigation.navigate('register')
     }
 
     return (
         <View style={styles.container}>
             <TextInput
                 style={ styles.input }
-                placeholder="E-mail"
+                placeholder="Email"
                 value={email}    
                 onChangeText={setEmail}
             />
             <TextInput
                 style={ styles.input }
-                placeholder="Senha"
+                placeholder="Password"
                 secureTextEntry={true}
                 value={password}    
                 onChangeText={setPassword}
             />
             <TouchableOpacity style={[styles.button, { marginTop: 10 }]} onPress={handleLogin} >
-                <Text style={ styles.buttonText }>Entrar</Text>
+                <Text style={ styles.buttonText }>Login</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={[styles.button, { marginTop: 20 }]} onPress={handleCadastro} >
-                <Text style={ styles.buttonText }>Cadastrar Usuário</Text>
+            <TouchableOpacity style={[styles.button, { marginTop: 20 }]} onPress={handleRegister} >
+                <Text style={ styles.buttonText }>Register User</Text>
             </TouchableOpacity>
 
         </View>
     )
-
 }
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 # README
 
-Este é um novo projeto de [**React Native**](https://reactnative.dev), criado usando o [`@react-native-community/cli`](https://github.com/react-native-community/cli). Este projeto é uma atividade avaliativa desenvolvida pelos alunos Felipe Ferreira e Cláudio Matos, do 4º semestre do curso de Desenvolvimento de Software Multiplataforma (DSM) da Fatec Franca. O projeto consome uma API pública do Rick and Morty.
+Este é um novo projeto de [**React Native**](https://reactnative.dev), criado usando o [`@react-native-community/cli`](https://github.com/react-native-community/cli). Este projeto é uma atividade avaliativa desenvolvida pelos alunos **Felipe Ferreira** e **Cláudio Matos**, do 4º semestre do curso de Desenvolvimento de Software Multiplataforma (DSM) da Fatec Franca. O projeto consome uma API pública do Rick and Morty.
 
 ## Começando
 
