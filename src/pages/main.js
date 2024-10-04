@@ -89,6 +89,7 @@ export default class Main extends Component {
       const {users, newUser} = this.state;
       this.setState({loading: true});
 
+<<<<<<< HEAD
       let apiUrl = '';
 
       if (!isNaN(newUser)) {
@@ -111,6 +112,17 @@ export default class Main extends Component {
       } else {
         character = response.data;
       }
+=======
+      const response = await api.get(`/character/?name=${newUser}`);
+
+      if (response.data.results.length === 0) {
+        alert('Character not found!');
+        this.setState({loading: false});
+        return;
+      }
+
+      const character = response.data.results[0]; 
+>>>>>>> 2c201d5e6ff46b25d90f62e2345977aabe174179
 
       if (users.find(user => user.name === character.name)) {
         alert('Character already added!');
@@ -120,8 +132,13 @@ export default class Main extends Component {
         return;
       }
 
+<<<<<<< HEAD
       const episodeUrl = character.episode[0];
       const episodeResponse = await api.get(episodeUrl);
+=======
+      const episodeUrl = character.episode[0]; 
+      const episodeResponse = await api.get(episodeUrl); 
+>>>>>>> 2c201d5e6ff46b25d90f62e2345977aabe174179
 
       const data = {
         name: character.name,
@@ -159,7 +176,11 @@ export default class Main extends Component {
       <Container>
         <Form>
           <Input
+<<<<<<< HEAD
             placeholder="Search character (name or ID)"
+=======
+            placeholder="Search character"
+>>>>>>> 2c201d5e6ff46b25d90f62e2345977aabe174179
             value={newUser}
             onChangeText={text => this.setState({newUser: text})}
             onSubmitEditing={this.handleAddUser}
