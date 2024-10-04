@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Main from './pages/main';
 import Login from './pages/login';
 import User from './pages/user';
-import Cadastro from './pages/cadastro';
+import Register from './pages/register';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +17,7 @@ export default function Routes() {
             name="login"
             component={Login}
             options={{
-              title: 'LOGIN',
+              title: 'Login',
               headerTitleAlign: 'center',
               headerStyle: {
                 backgroundColor: '#3498db',
@@ -33,7 +33,7 @@ export default function Routes() {
           name="main"
           component={Main}
           options={{
-            title: 'The Rick and Morty VIEWER',
+            title: 'The Rick and Morty Viewer',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#3498db',
@@ -49,7 +49,7 @@ export default function Routes() {
           name="user"
           component={User}
           options={{
-            title: 'Perfil do Personagem',
+            title: 'Character Profile',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#3498db',
@@ -62,10 +62,10 @@ export default function Routes() {
           }}
         />
         <Stack.Screen
-          name="cadastro"
-          component={Cadastro}
+          name="register"
+          component={Register}
           options={{
-            title: 'Cadastro de Usuário',
+            title: 'Register User',
             headerTitleAlign: 'center',
             headerStyle: {
               backgroundColor: '#3498db',
